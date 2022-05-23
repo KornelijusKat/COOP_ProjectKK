@@ -14,7 +14,7 @@ window.onclick = function(event) {
     }
 }
 
-// Registration from shell
+// Registration form shell
 
 // Get the modal
 var modal2 = document.getElementById('id02');
