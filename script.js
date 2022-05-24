@@ -3,9 +3,9 @@
 // Get the modal
 var modal = document.getElementById('id01');
 
-let myloginButton = document.querySelector("#loginbtn");  myloginButton.style.position = "absolute";
-myloginButton.style.left = "47%";
-myloginButton.style.transform = "translateX(-50%)";
+// let loginButton = document.querySelector("#loginbtn");  loginButton.style.position = "absolute";
+// loginButton.style.left = "47%";
+// loginButton.style.transform = "translateX(-50%)";
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
@@ -26,6 +26,6 @@ window.onclick = function(event) {
   }
 }
 
-let registrationButton = document.querySelector("#signupbtn");  registrationButton.style.position = "absolute";
-registrationButton.style.left = "53%";
-registrationButton.style.transform = "translateX(-50%)";
+// let registrationButton = document.querySelector("#signupbtn");  registrationButton.style.position = "absolute";
+// registrationButton.style.left = "53%";
+// registrationButton.style.transform = "translateX(-50%)";

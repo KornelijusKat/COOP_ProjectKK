@@ -12,7 +12,8 @@
 
 <!-- Login form shell -->
 
-<button id="loginbtn" onclick="document.getElementById('id01').style.display='block'" style="width:auto; ;">Login</button>
+<button id="loginbtn" onclick="document.getElementById('id01').style.display='block'" style="width:auto; left: 47%;
+position: absolute; display: block; transform: translateX(-50%)">Login</button>
 
 <div id="id01" class="modal">
   
@@ -44,10 +45,11 @@
 
 <!-- Registration form shell -->
 
-<button id="signupbtn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</button>
+<button id="signupbtn" onclick="document.getElementById('id02').style.display='block'" style="width:auto; left: 53%;
+position: absolute; transform: translateX(-50%);">Sign Up</button>
 
 <div id="id02" class="modal">
-  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
   <form class="modal-content" action="/action_page.php">
     <div class="container">
       <h1>Sign Up</h1>
