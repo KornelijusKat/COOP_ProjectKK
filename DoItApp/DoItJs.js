@@ -9,18 +9,18 @@ const snewForm = document.createElement('form');
 const sfirstInput = document.createElement('input');
 const ssecondInput = document.createElement('input');
 const sthirdInput = document.createElement('input');
+const container = document.querySelector('.container');
 let placeholder;
 submitter2.setAttribute('type','submit');
 submitter.setAttribute("type","submit");
 //button click that shows a form to submit for posting to database
 AddButton.addEventListener('click',function(event){
-    event.preventDefault();
     createForm(submitter);
 })
 //creates form for Add button
 function createForm(submit){ 
     newForm.append(firstInput,secondInput,thirdInput,submit);
-    document.body.append(newForm);
+    container.append(newForm);
 }
 //Adds new record to users account ps(insert user value into body when localhost thing is finished)
 function AddPost(){
@@ -32,7 +32,8 @@ function AddPost(){
        body: JSON.stringify({
           type: firstInput.value,
           content: secondInput.value,
-          endDate: thirdInput.value,  
+          endDate: thirdInput.value, 
+          User: localStorage.getItem('name','Jeff')
         })
       })
         .then((response) => {
@@ -45,7 +46,9 @@ function AddPost(){
         })  .then((result) => {
           console.log(result);
       })
-      .then((result) =>{
+      .then((result) => {
+        container.innerHTML = "";
+        GetRecordsOfUser()
      })
       .catch((err) => {
         console.log(err);  
@@ -60,7 +63,7 @@ function GetRecordsOfUser(){
             }
           })
           .then(result => { 
-              let it = result.data.filter(({type}) => type === 'Jamaica' )||[];
+              let it = result.data.filter(({User}) => User === GetUser() )||[];
               CreateDiv(it);
         })
        }  
@@ -89,7 +92,8 @@ function CreateDiv(Records){
         DivCard.innerHTML = JSON.stringify(element); 
         DivCard.append(editButton,deleteButton);
         DivCard.setAttribute('id',element.id);
-        document.body.append(DivCard)});
+        DivCard.className = 'card';
+        container.append(DivCard)});
 }  
 //Deletes selected div card
 async function DeleteRecord(RecordID,DivCard){
@@ -101,7 +105,6 @@ async function DeleteRecord(RecordID,DivCard){
   })
   if(deleter){
     DivCard.innerHTML = "";
-    GetRecordsOfUser();
   }
 }      
 // Click event that sends input values to Database
@@ -123,14 +126,20 @@ async function EditRecord(Userid){
     })
   })
   if(editing){
-    document.body.innerHTML = "";
+    container.innerHTML = "";
     GetRecordsOfUser();
   }
 }
-
-GetRecordsOfUser();
+GetRecordsOfUser()
 //Editing form for input
 function EditFields(){
 snewForm.append(sfirstInput,ssecondInput,sthirdInput,submitter2);
-document.body.append(snewForm);
+container.append(snewForm);
 }
+//returns user from localstorage(also maybe need to change name part if doesnt get localstorage item)
+function GetUser(){
+  const getName = localStorage.getItem('name');
+  return getName;
+}
+//uncomment this one if you want to test but no item localstorage
+//localStorage.setItem('name','Jeff');
