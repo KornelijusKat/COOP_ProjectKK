@@ -4,6 +4,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 h1 {
     text-align: center;
     margin: 50px;
+    margin-top: 110px;
 }
 
 /* Login form shell */
@@ -20,6 +21,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
+  text-align: center;
   background-color: #049761;
   color: white;
   padding: 14px 20px;
@@ -27,7 +29,6 @@ button {
   border: none;
   cursor: pointer;
   width: 100%;
-  
 }
 
 button:hover {
@@ -92,6 +93,7 @@ span.psw {
 
 /* The Close Button (x) */
 .close {
+  float: right;
   position: absolute;
   right: 25px;
   top: 0;
