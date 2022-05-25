@@ -10,6 +10,7 @@ const sfirstInput = document.createElement('input');
 const ssecondInput = document.createElement('input');
 const sthirdInput = document.createElement('input');
 const container = document.querySelector('.container');
+const addformlocation = document.querySelector('#Form')
 let placeholder;
 submitter2.setAttribute('type','submit');
 submitter.setAttribute("type","submit");
@@ -20,7 +21,7 @@ AddButton.addEventListener('click',function(event){
 //creates form for Add button
 function createForm(submit){ 
     newForm.append(firstInput,secondInput,thirdInput,submit);
-    container.append(newForm);
+    addformlocation.append(newForm);
 }
 //Adds new record to users account ps(insert user value into body when localhost thing is finished)
 function AddPost(){
@@ -47,6 +48,7 @@ function AddPost(){
           console.log(result);
       })
       .then((result) => {
+        addformlocation.innerHTML = "";
         container.innerHTML = "";
         GetRecordsOfUser()
      })
@@ -71,6 +73,7 @@ function GetRecordsOfUser(){
 function CreateDiv(Records){
     Records.forEach(element => {
         const DivCard = document.createElement('div');
+        DivCard.className = 'card';
         const editButton = document.createElement('button');
         const deleteButton = document.createElement('button');
         deleteButton.addEventListener('click',function(event){
@@ -89,10 +92,15 @@ function CreateDiv(Records){
           })
         })
         console.log(element);
-        DivCard.innerHTML = JSON.stringify(element); 
+        const myobjarr = JSON.stringify(element); 
+        DivCard.innerHTML = JSON.stringify(element).replaceAll(',','<br />').replaceAll('}','<br />').replaceAll('{','');
+        editButton.className = 'recordbtn';
+        editButton.innerHTML = "Edit";
+        deleteButton.className = 'recordbtn';
+        deleteButton.innerHTML = 'Delete';
         DivCard.append(editButton,deleteButton);
         DivCard.setAttribute('id',element.id);
-        DivCard.className = 'card';
+        
         container.append(DivCard)});
 }  
 //Deletes selected div card
@@ -104,7 +112,8 @@ async function DeleteRecord(RecordID,DivCard){
     },
   })
   if(deleter){
-    DivCard.innerHTML = "";
+    DivCard.innerHTML ="";
+    DivCard.style.border ="none";
   }
 }      
 // Click event that sends input values to Database
@@ -122,11 +131,13 @@ async function EditRecord(Userid){
     body: JSON.stringify({
       'type': sfirstInput.value,
       'content': ssecondInput.value,
-      'endDate' : sthirdInput.value
+      'endDate' : sthirdInput.value,
+      'User' : localStorage.getItem('name')
     })
   })
   if(editing){
     container.innerHTML = "";
+    addformlocation.innerHTML = "";
     GetRecordsOfUser();
   }
 }
@@ -134,7 +145,7 @@ GetRecordsOfUser()
 //Editing form for input
 function EditFields(){
 snewForm.append(sfirstInput,ssecondInput,sthirdInput,submitter2);
-container.append(snewForm);
+addformlocation.append(snewForm);
 }
 //returns user from localstorage(also maybe need to change name part if doesnt get localstorage item)
 function GetUser(){
@@ -142,4 +153,4 @@ function GetUser(){
   return getName;
 }
 //uncomment this one if you want to test but no item localstorage
-//localStorage.setItem('name','Jeff');
+localStorage.setItem('name','Jeff');
