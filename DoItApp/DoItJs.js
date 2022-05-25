@@ -9,19 +9,18 @@ const snewForm = document.createElement('form');
 const sfirstInput = document.createElement('input');
 const ssecondInput = document.createElement('input');
 const sthirdInput = document.createElement('input');
-const container = document.querySelector('.container');
-const addformlocation = document.querySelector('#Form')
 let placeholder;
 submitter2.setAttribute('type','submit');
 submitter.setAttribute("type","submit");
 //button click that shows a form to submit for posting to database
 AddButton.addEventListener('click',function(event){
+    event.preventDefault();
     createForm(submitter);
 })
 //creates form for Add button
 function createForm(submit){ 
     newForm.append(firstInput,secondInput,thirdInput,submit);
-    addformlocation.append(newForm);
+    document.body.append(newForm);
 }
 //Adds new record to users account ps(insert user value into body when localhost thing is finished)
 function AddPost(){
@@ -33,8 +32,7 @@ function AddPost(){
        body: JSON.stringify({
           type: firstInput.value,
           content: secondInput.value,
-          endDate: thirdInput.value, 
-          User: localStorage.getItem('name','Jeff')
+          endDate: thirdInput.value,  
         })
       })
         .then((response) => {
@@ -47,10 +45,7 @@ function AddPost(){
         })  .then((result) => {
           console.log(result);
       })
-      .then((result) => {
-        addformlocation.innerHTML = "";
-        container.innerHTML = "";
-        GetRecordsOfUser()
+      .then((result) =>{
      })
       .catch((err) => {
         console.log(err);  
@@ -65,7 +60,7 @@ function GetRecordsOfUser(){
             }
           })
           .then(result => { 
-              let it = result.data.filter(({User}) => User === GetUser() )||[];
+              let it = result.data.filter(({type}) => type === 'Jamaica' )||[];
               CreateDiv(it);
         })
        }  
@@ -73,7 +68,6 @@ function GetRecordsOfUser(){
 function CreateDiv(Records){
     Records.forEach(element => {
         const DivCard = document.createElement('div');
-        DivCard.className = 'card';
         const editButton = document.createElement('button');
         const deleteButton = document.createElement('button');
         deleteButton.addEventListener('click',function(event){
@@ -92,16 +86,10 @@ function CreateDiv(Records){
           })
         })
         console.log(element);
-        const myobjarr = JSON.stringify(element); 
-        DivCard.innerHTML = JSON.stringify(element).replaceAll(',','<br />').replaceAll('}','<br />').replaceAll('{','');
-        editButton.className = 'recordbtn';
-        editButton.innerHTML = "Edit";
-        deleteButton.className = 'recordbtn';
-        deleteButton.innerHTML = 'Delete';
+        DivCard.innerHTML = JSON.stringify(element); 
         DivCard.append(editButton,deleteButton);
         DivCard.setAttribute('id',element.id);
-        
-        container.append(DivCard)});
+        document.body.append(DivCard)});
 }  
 //Deletes selected div card
 async function DeleteRecord(RecordID,DivCard){
@@ -112,8 +100,8 @@ async function DeleteRecord(RecordID,DivCard){
     },
   })
   if(deleter){
-    DivCard.innerHTML ="";
-    DivCard.style.border ="none";
+    DivCard.innerHTML = "";
+    GetRecordsOfUser();
   }
 }      
 // Click event that sends input values to Database
@@ -131,26 +119,18 @@ async function EditRecord(Userid){
     body: JSON.stringify({
       'type': sfirstInput.value,
       'content': ssecondInput.value,
-      'endDate' : sthirdInput.value,
-      'User' : localStorage.getItem('name')
+      'endDate' : sthirdInput.value
     })
   })
   if(editing){
-    container.innerHTML = "";
-    addformlocation.innerHTML = "";
+    document.body.innerHTML = "";
     GetRecordsOfUser();
   }
 }
-GetRecordsOfUser()
+
+GetRecordsOfUser();
 //Editing form for input
 function EditFields(){
 snewForm.append(sfirstInput,ssecondInput,sthirdInput,submitter2);
-addformlocation.append(snewForm);
+document.body.append(snewForm);
 }
-//returns user from localstorage(also maybe need to change name part if doesnt get localstorage item)
-function GetUser(){
-  const getName = localStorage.getItem('name');
-  return getName;
-}
-//uncomment this one if you want to test but no item localstorage
-localStorage.setItem('name','Jeff');
