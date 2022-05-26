@@ -75,6 +75,8 @@ function GetRecordsOfUser(){
 function CreateDiv(Records){
     Records.forEach(element => {
         const DivCard = document.createElement('div');
+        const buttondiv = document.createElement('div');
+        buttondiv.className = 'cardbuttondiv';
         DivCard.className = 'card';
         const editButton = document.createElement('button');
         const deleteButton = document.createElement('button');
@@ -100,7 +102,8 @@ function CreateDiv(Records){
         editButton.innerHTML = "Edit";
         deleteButton.className = 'recordbtn2';
         deleteButton.innerHTML = 'Delete';
-        DivCard.append(editButton,deleteButton);
+        
+        DivCard.append(buttondiv,editButton,deleteButton);
         DivCard.setAttribute('id',element.id);
         
         container.append(DivCard)});

@@ -13,7 +13,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    
+    vertical-align: middle;
 
 }
 .container{
@@ -24,15 +24,24 @@
     flex-direction: row;
     flex:20%;
     flex-wrap: wrap;
+    
+    
 }
 .button{
     width: 100%;
     text-align: center;
 }
+.cardbuttondiv{
+    
+    height:50px;
+    width: 1px;
+}
 .recordbtn{
-   align-self: flex-end;
-   flex-grow: 1;
-   display: flex;
+  position: absolute;
+  left:50px; 
+  bottom:20px;
+  
+  
     
 }
 .recordbtn2{
