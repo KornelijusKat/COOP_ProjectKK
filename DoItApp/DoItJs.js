@@ -107,8 +107,9 @@ function CreateDiv(Records){
         DivCard.innerHTML = JSON.stringify(element).replaceAll(',','<br />').replaceAll('}','<br />').replaceAll('{','');
         editButton.className = 'recordbtn';
         editButton.innerHTML = "Edit";
-        deleteButton.className = 'recordbtn';
+        deleteButton.className = 'recordbtn2';
         deleteButton.innerHTML = 'Delete';
+      
         DivCard.append(editButton,deleteButton);
         DivCard.setAttribute('id',element.id);
         
