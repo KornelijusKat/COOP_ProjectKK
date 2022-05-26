@@ -66,6 +66,8 @@ function GetRecordsOfUser(){
           })
           .then(result => { 
               let it = result.data.filter(({User}) => User === GetUser() )||[];
+              container.innerHTML = "";
+              addformlocation.innerHTML = "";
               CreateDiv(it);
         })
        }  
@@ -73,6 +75,8 @@ function GetRecordsOfUser(){
 function CreateDiv(Records){
     Records.forEach(element => {
         const DivCard = document.createElement('div');
+        const buttondiv = document.createElement('div');
+        buttondiv.className = 'cardbuttondiv';
         DivCard.className = 'card';
         const editButton = document.createElement('button');
         const deleteButton = document.createElement('button');
@@ -98,8 +102,8 @@ function CreateDiv(Records){
         editButton.innerHTML = "Edit";
         deleteButton.className = 'recordbtn2';
         deleteButton.innerHTML = 'Delete';
-      
-        DivCard.append(editButton,deleteButton);
+        
+        DivCard.append(buttondiv,editButton,deleteButton);
         DivCard.setAttribute('id',element.id);
         
         container.append(DivCard)});
@@ -113,8 +117,9 @@ async function DeleteRecord(RecordID,DivCard){
     },
   })
   if(deleter){
-    DivCard.innerHTML ="";
-    DivCard.style.border ="none";
+    // DivCard.innerHTML ="";
+    // DivCard.style.border ="none";
+    GetRecordsOfUser();
   }
 }      
 // Click event that sends input values to Database
@@ -137,8 +142,7 @@ async function EditRecord(Userid){
     })
   })
   if(editing){
-    container.innerHTML = "";
-    addformlocation.innerHTML = "";
+   
     GetRecordsOfUser();
   }
 }
