@@ -54,27 +54,27 @@ localStorage.setItem("users",JSON.stringify(user_records));
 }
 }
 
-const addRegistration = document.querySelector('#signupbtn');
-const firstInput2 = document.querySelector('#email');
-const secondInput2 = document.querySelector('#name');
-const thirdInput2 = document.querySelector('#psw');
+const addReg = document.querySelector('#signupbtn');
+const emailInput = document.querySelector('#email');
+const nameInput = document.querySelector('#name');
+const pswInput = document.querySelector('#psw');
 
 // Click event that sends input values to Database
-addRegistration.addEventListener('click', function(event){
+addReg.addEventListener('click', function(event){
     event.preventDefault();
-    AddPost2();
+    AddReg();
     })
 
-function AddPost2(){
+function AddReg(){
     const apiPost = fetch('https://testapi.io/api/Donciavas/resource/registration', {
         method: 'POST',
         headers: {
          'Content-type': 'application/json'
         },
        body: JSON.stringify({
-          email: firstInput2.value,
-          name: secondInput2.value,
-          password: thirdInput2.value 
+          email: emailInput.value,
+          name: nameInput.value,
+          password: pswInput.value 
         })
       })
         .then((response) => {
