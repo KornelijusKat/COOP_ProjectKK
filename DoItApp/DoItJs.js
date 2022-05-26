@@ -9,30 +9,19 @@ const snewForm = document.createElement('form');
 const sfirstInput = document.createElement('input');
 const ssecondInput = document.createElement('input');
 const sthirdInput = document.createElement('input');
-<<<<<<< HEAD
 const container = document.querySelector('.container');
 const addformlocation = document.querySelector('#Form')
-=======
->>>>>>> ceed6f923c27a186f2716f72dcd077658c1982cc
 let placeholder;
 submitter2.setAttribute('type','submit');
 submitter.setAttribute("type","submit");
 //button click that shows a form to submit for posting to database
 AddButton.addEventListener('click',function(event){
-<<<<<<< HEAD
-=======
-    event.preventDefault();
->>>>>>> ceed6f923c27a186f2716f72dcd077658c1982cc
     createForm(submitter);
 })
 //creates form for Add button
 function createForm(submit){ 
     newForm.append(firstInput,secondInput,thirdInput,submit);
-<<<<<<< HEAD
     addformlocation.append(newForm);
-=======
-    document.body.append(newForm);
->>>>>>> ceed6f923c27a186f2716f72dcd077658c1982cc
 }
 //Adds new record to users account ps(insert user value into body when localhost thing is finished)
 function AddPost(){
@@ -77,6 +66,8 @@ function GetRecordsOfUser(){
           })
           .then(result => { 
               let it = result.data.filter(({User}) => User === GetUser() )||[];
+              container.innerHTML = "";
+              addformlocation.innerHTML = "";
               CreateDiv(it);
         })
        }  
@@ -109,7 +100,6 @@ function CreateDiv(Records){
         editButton.innerHTML = "Edit";
         deleteButton.className = 'recordbtn2';
         deleteButton.innerHTML = 'Delete';
-      
         DivCard.append(editButton,deleteButton);
         DivCard.setAttribute('id',element.id);
         
@@ -124,8 +114,9 @@ async function DeleteRecord(RecordID,DivCard){
     },
   })
   if(deleter){
-    DivCard.innerHTML ="";
-    DivCard.style.border ="none";
+    // DivCard.innerHTML ="";
+    // DivCard.style.border ="none";
+    GetRecordsOfUser();
   }
 }      
 // Click event that sends input values to Database
@@ -143,14 +134,12 @@ async function EditRecord(Userid){
     body: JSON.stringify({
       'type': sfirstInput.value,
       'content': ssecondInput.value,
-<<<<<<< HEAD
       'endDate' : sthirdInput.value,
       'User' : localStorage.getItem('name')
     })
   })
   if(editing){
-    container.innerHTML = "";
-    addformlocation.innerHTML = "";
+   
     GetRecordsOfUser();
   }
 }
@@ -167,20 +156,3 @@ function GetUser(){
 }
 //uncomment this one if you want to test but no item localstorage
 localStorage.setItem('name','Jeff');
-=======
-      'endDate' : sthirdInput.value
-    })
-  })
-  if(editing){
-    document.body.innerHTML = "";
-    GetRecordsOfUser();
-  }
-}
-
-GetRecordsOfUser();
-//Editing form for input
-function EditFields(){
-snewForm.append(sfirstInput,ssecondInput,sthirdInput,submitter2);
-document.body.append(snewForm);
-}
->>>>>>> ceed6f923c27a186f2716f72dcd077658c1982cc

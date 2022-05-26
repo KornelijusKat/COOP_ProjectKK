@@ -1,17 +1,19 @@
 .card{
     max-width: 200px;
     border: solid ;
-    height: 400px;
+    
     margin-top: 10px;
     border-radius: 5px;
     margin-right: 10px;
     overflow-wrap: break-word;
     align-items: center;
     min-width:20%;
-   padding: 20px;
+    padding: 20px;
     text-align: center;
     position: relative;
-  
+    display: flex;
+    flex-direction: column;
+    
 
 }
 .container{
@@ -22,20 +24,15 @@
     flex-direction: row;
     flex:20%;
     flex-wrap: wrap;
-   
-
-    
-
 }
 .button{
     width: 100%;
     text-align: center;
 }
 .recordbtn{
-   position: absolute;
-   justify-content: space-between;
-   left:50px;
-   bottom:20px;
+   align-self: flex-end;
+   flex-grow: 1;
+   display: flex;
     
 }
 .recordbtn2{
