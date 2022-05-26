@@ -30,7 +30,7 @@ position: absolute; display: block; transform: translateX(-50%)">Login</button>
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
         
-      <button type="submit">Login</button>
+      <button type="submit" onclick="saveData()">Login</button>
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>
@@ -76,7 +76,7 @@ position: absolute; transform: translateX(-50%);">Sign Up</button>
 
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('regdiv').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" onclick="saveData()" class="signupbtn">Sign Up</button>
+        <button type="submit" class="signupbtn">Sign Up</button>
       </div>
     </div>
   </form>
