@@ -91,3 +91,21 @@ function AddReg(){
         console.log(err);  
     })  
 }
+
+function getUsers() {
+  fetch('https://testapi.io/api/Donciavas/resource/registration')
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+  })
+  .then(result => { 
+    let it = result.data.filter(({nameInput}) => User === getUsers() )||[];
+})
+  .then(result => render(result.data)); 
+}
+function render(users) {
+  users.forEach(user => {
+    saveData()
+    })
+  }
