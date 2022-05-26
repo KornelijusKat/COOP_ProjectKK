@@ -17,7 +17,7 @@ position: absolute; display: block; transform: translateX(-50%)">Login</button>
 
 <div id="logindiv" class="modal">
   
-  <form class="modal-content animate" action="#" method="post">
+  <form class="modal-content animate" action="https://testapi.io/api/KornelKat/resource/SecondDatabase" method="get">
     <div class="imgcontainer">
       <span onclick="document.getElementById('logindiv').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="https://cdn3.iconfinder.com/data/icons/essential-rounded/64/Rounded-31-512.png" alt="Avatar" class="avatar">
@@ -30,7 +30,7 @@ position: absolute; display: block; transform: translateX(-50%)">Login</button>
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
         
-      <button type="submit" onclick="saveData()">Login</button>
+      <button type="submit" onclick="getUsers()">Login</button>
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>
