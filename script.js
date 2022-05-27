@@ -94,16 +94,26 @@ function AddReg(){
 
 function getUsers() {
   fetch('https://testapi.io/api/Donciavas/resource/registration')
-  .then((res) => {
-    if (res.ok) {
+  .then((response) => {
+    if (response.ok) {
       return res.json();
     }
   })
   .then(result => { 
     let it = result.data.filter(({nameInput}) => User === getUsers() )||[];
+    users.forEach(user => {
+      saveData()
+      render(users)
+      window.location.href("DoItHtml.html");
+      // window.location.assign("DoItHtml.html");
+      
+      })
 })
-  .then(result => render(result.data)); 
+  .then(res => render(res.data)); 
+  // .then(render(users));
 }
+
+
 function render(users) {
   users.forEach(user => {
     saveData()
