@@ -10,7 +10,8 @@ const sfirstInput = document.createElement('input');
 const ssecondInput = document.createElement('input');
 const sthirdInput = document.createElement('input');
 const container = document.querySelector('.container');
-const addformlocation = document.querySelector('#Form')
+const addformlocation = document.querySelector('#Form');
+const userhead3 = document.querySelector('#ShowUser');
 let placeholder;
 submitter2.setAttribute('type','submit');
 submitter.setAttribute("type","submit");
@@ -159,3 +160,4 @@ function GetUser(){
 }
 //uncomment this one if you want to test but no item localstorage
 localStorage.setItem('name','Jeff');
+userhead3.innerHTML +=  localStorage.getItem('name')
