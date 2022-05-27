@@ -35,7 +35,7 @@ function AddPost(){
           type: firstInput.value,
           content: secondInput.value,
           endDate: thirdInput.value, 
-          User: localStorage.getItem('name','Jeff')
+          User: JSON.stringify(art[0]['name']).replaceAll('"',"")
         })
       })
         .then((response) => {
@@ -66,7 +66,7 @@ function GetRecordsOfUser(){
             }
           })
           .then(result => { 
-              let it = result.data.filter(({User}) => User === GetUser() )||[];
+              let it = result.data.filter(({User}) => User === JSON.stringify(art[0]['name']).replaceAll('"',"") )||[];
               container.innerHTML = "";
               addformlocation.innerHTML = "";
               CreateDiv(it);
@@ -77,6 +77,7 @@ function CreateDiv(Records){
     Records.forEach(element => {
         const DivCard = document.createElement('div');
         const buttondiv = document.createElement('div');
+        const paragraph = document.createElement('p');
         buttondiv.className = 'cardbuttondiv';
         DivCard.className = 'card';
         const editButton = document.createElement('button');
@@ -98,13 +99,13 @@ function CreateDiv(Records){
         })
         console.log(element);
         const myobjarr = JSON.stringify(element); 
-        DivCard.innerHTML = JSON.stringify(element).replaceAll(',','<br />').replaceAll('}','<br />').replaceAll('{','');
+        paragraph.innerHTML = JSON.stringify(element).replaceAll(',','<br />').replaceAll('}','<br />').replaceAll('{','');
         editButton.className = 'recordbtn';
         editButton.innerHTML = "Edit";
         deleteButton.className = 'recordbtn2';
         deleteButton.innerHTML = 'Delete';
         
-        DivCard.append(buttondiv,editButton,deleteButton);
+        DivCard.append(paragraph,buttondiv,editButton,deleteButton);
         DivCard.setAttribute('id',element.id);
         
         container.append(DivCard)});
@@ -139,7 +140,7 @@ async function EditRecord(Userid){
       'type': sfirstInput.value,
       'content': ssecondInput.value,
       'endDate' : sthirdInput.value,
-      'User' : localStorage.getItem('name')
+      'User' :  JSON.stringify(art[0]['name']).replaceAll('"',"")
     })
   })
   if(editing){
@@ -155,9 +156,16 @@ addformlocation.append(snewForm);
 }
 //returns user from localstorage(also maybe need to change name part if doesnt get localstorage item)
 function GetUser(){
-  const getName = localStorage.getItem('name');
+  const getName = localStorage.getItem('name')||[];
   return getName;
 }
 //uncomment this one if you want to test but no item localstorage
-localStorage.setItem('name','Jeff');
-userhead3.innerHTML +=  localStorage.getItem('name')
+//localStorage.setItem('name','Jeff');
+let thb = [{
+  "name" : "Jeff",
+  "lastname": "jamal"
+}]
+localStorage.setItem('names',JSON.stringify(thb));
+let art = JSON.parse(localStorage.getItem("names"));
+console.log(thb);
+userhead3.innerHTML +=  JSON.stringify(art[0]['name'])
