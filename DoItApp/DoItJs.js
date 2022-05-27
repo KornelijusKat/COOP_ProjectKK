@@ -35,7 +35,7 @@ function AddPost(){
           type: firstInput.value,
           content: secondInput.value,
           endDate: thirdInput.value, 
-          User: localStorage.getItem('name','Jeff')
+          User: GetUser()
         })
       })
         .then((response) => {
@@ -66,7 +66,7 @@ function GetRecordsOfUser(){
             }
           })
           .then(result => { 
-              let it = result.data.filter(({User}) => User === GetUser() )||[];
+              let it = result.data.filter(({User}) => User === JSON.stringify(art[0]['name']).replaceAll('"',"") )||[];
               container.innerHTML = "";
               addformlocation.innerHTML = "";
               CreateDiv(it);
@@ -139,7 +139,7 @@ async function EditRecord(Userid){
       'type': sfirstInput.value,
       'content': ssecondInput.value,
       'endDate' : sthirdInput.value,
-      'User' : localStorage.getItem('name')
+      'User' :  JSON.stringify(art[0]['name']).replaceAll('"',"")
     })
   })
   if(editing){
@@ -155,9 +155,16 @@ addformlocation.append(snewForm);
 }
 //returns user from localstorage(also maybe need to change name part if doesnt get localstorage item)
 function GetUser(){
-  const getName = localStorage.getItem('name');
+  const getName = localStorage.getItem('name')||[];
   return getName;
 }
 //uncomment this one if you want to test but no item localstorage
-localStorage.setItem('name','Jeff');
-userhead3.innerHTML +=  localStorage.getItem('name')
+//localStorage.setItem('name','Jeff');
+let thb = [{
+  "name" : "Jeff",
+  "lastname": "jamal"
+}]
+localStorage.setItem('names',JSON.stringify(thb));
+let art = JSON.parse(localStorage.getItem("names"));
+console.log(thb);
+userhead3.innerHTML +=  JSON.stringify(art[0]['name'])
