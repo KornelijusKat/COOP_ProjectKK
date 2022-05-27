@@ -12,12 +12,12 @@
 
 <!-- Login form shell -->
 
-<button id="loginbtn" onclick="document.getElementById('logindiv').style.display='block'" style="width:auto; left: 47%;
+<button onclick="document.getElementById('logindiv').style.display='block'" style="width:auto; left: 47%;
 position: absolute; display: block; transform: translateX(-50%)">Login</button>
 
 <div id="logindiv" class="modal">
   
-  <form class="modal-content animate" action="https://testapi.io/api/Donciavas/resource/registration" method="post">
+  <form class="modal-content animate"                      >
     <div class="imgcontainer">
       <span onclick="document.getElementById('logindiv').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="https://cdn3.iconfinder.com/data/icons/essential-rounded/64/Rounded-31-512.png" alt="Avatar" class="avatar">
@@ -30,7 +30,7 @@ position: absolute; display: block; transform: translateX(-50%)">Login</button>
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
         
-      <button type="submit" onclick="getUsers()">Login</button>
+      <button id="loginbtn" type="submit" onclick="getUsers()">Login</button>
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>
@@ -50,7 +50,7 @@ position: absolute; transform: translateX(-50%);">Sign Up</button>
 
 <div id="regdiv" class="modal">
     <span onclick="document.getElementById('regdiv').style.display='none'" class="close" title="Close Modal">&times;</span>
-  <form class="modal-content" action="https://testapi.io/api/Donciavas/resource/registration">
+  <form class="modal-content"           >
     <div class="container">
       <h1>Sign Up</h1>
       <p>Please fill in this form to create an account.</p>

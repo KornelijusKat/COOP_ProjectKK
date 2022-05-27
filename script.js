@@ -55,6 +55,7 @@ localStorage.setItem("users",JSON.stringify(user_records));
 }
 
 const addReg = document.querySelector('#signupbtn');
+const getReg = document.querySelector('#loginbtn');
 const emailInput = document.querySelector('#email');
 const nameInput = document.querySelector('#name');
 const pswInput = document.querySelector('#psw');
@@ -96,7 +97,10 @@ function getUsers() {
   fetch('https://testapi.io/api/Donciavas/resource/registration')
   .then((response) => {
     if (response.ok) {
-      return res.json();
+      console.log('ok');
+      return response.json();
+    } else {
+      console.log('not okay');
     }
   })
   .then(result => { 
@@ -104,14 +108,24 @@ function getUsers() {
       })
       .then(result1 => { 
         let it = result.data.filter(({nameInput}) => User === getUsers() )||[];
-        window.location.href("DoItHtml.html");
+        localStorage.setItem('User', JSON.stringify(it)||[]);
+        // window.location.href("DoItHtml.html");
+      // window.location.href = "DoItHtml.html";
       // window.location.assign("DoItHtml.html");
       })
 
-  .then(res => render(res.data)); 
+  // .then(res => render(res.data)) 
   // .then(render(users));
+  .catch((error) => {
+    console.log(error);  
+})  
 }
 
+// Click event that gets values from Database
+getReg.addEventListener('click', function(e){
+  e.preventDefault();
+  getUsers();
+  })
 
 function render(users) {
   users.forEach(user => {
