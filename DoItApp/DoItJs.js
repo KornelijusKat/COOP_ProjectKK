@@ -12,7 +12,6 @@ const sthirdInput = document.createElement('input');
 const container = document.querySelector('.container');
 const addformlocation = document.querySelector('#Form');
 const userhead3 = document.querySelector('#ShowUser');
-
 let placeholder;
 submitter2.setAttribute('type','submit');
 submitter.setAttribute("type","submit");
