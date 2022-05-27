@@ -35,7 +35,7 @@ function AddPost(){
           type: firstInput.value,
           content: secondInput.value,
           endDate: thirdInput.value, 
-          User: GetUser()
+          User: JSON.stringify(art[0]['name']).replaceAll('"',"")
         })
       })
         .then((response) => {
@@ -77,6 +77,7 @@ function CreateDiv(Records){
     Records.forEach(element => {
         const DivCard = document.createElement('div');
         const buttondiv = document.createElement('div');
+        const paragraph = document.createElement('p');
         buttondiv.className = 'cardbuttondiv';
         DivCard.className = 'card';
         const editButton = document.createElement('button');
@@ -98,13 +99,13 @@ function CreateDiv(Records){
         })
         console.log(element);
         const myobjarr = JSON.stringify(element); 
-        DivCard.innerHTML = JSON.stringify(element).replaceAll(',','<br />').replaceAll('}','<br />').replaceAll('{','');
+        paragraph.innerHTML = JSON.stringify(element).replaceAll(',','<br />').replaceAll('}','<br />').replaceAll('{','');
         editButton.className = 'recordbtn';
         editButton.innerHTML = "Edit";
         deleteButton.className = 'recordbtn2';
         deleteButton.innerHTML = 'Delete';
         
-        DivCard.append(buttondiv,editButton,deleteButton);
+        DivCard.append(paragraph,buttondiv,editButton,deleteButton);
         DivCard.setAttribute('id',element.id);
         
         container.append(DivCard)});
