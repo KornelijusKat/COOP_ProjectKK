@@ -100,15 +100,14 @@ function getUsers() {
     }
   })
   .then(result => { 
-    let it = result.data.filter(({nameInput}) => User === getUsers() )||[];
-    users.forEach(user => {
-      saveData()
-      render(users)
-      window.location.href("DoItHtml.html");
-      // window.location.assign("DoItHtml.html");
-      
+    render(users)
       })
-})
+      .then(result1 => { 
+        let it = result.data.filter(({nameInput}) => User === getUsers() )||[];
+        window.location.href("DoItHtml.html");
+      // window.location.assign("DoItHtml.html");
+      })
+
   .then(res => render(res.data)); 
   // .then(render(users));
 }
