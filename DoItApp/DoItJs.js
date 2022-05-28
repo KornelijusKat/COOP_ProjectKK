@@ -165,7 +165,7 @@ let thb = [{
   "name" : "Jeff",
   "lastname": "jamal"
 }]
-localStorage.setItem('names',JSON.stringify(thb));
-let art = JSON.parse(localStorage.getItem("names"));
+//localStorage.setItem('names',JSON.stringify(thb));
+let art = JSON.parse(localStorage.getItem("User"));
 console.log(thb);
-userhead3.innerHTML +=  JSON.stringify(art[0]['name'])
+userhead3.innerHTML +=  JSON.stringify(art[0]['name'] + JSON.stringify(art[0]['password']))
