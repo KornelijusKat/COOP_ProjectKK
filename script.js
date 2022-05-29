@@ -35,9 +35,7 @@ const getReg = document.querySelector('#loginBtn');
 const emailInput = document.querySelector('#email');
 const nameInput = document.querySelector('#regName');
 const pswInput = document.querySelector('#regLastname');
-//login inputo naujas pavadinimas(kazkodel neisejo man perduoti ta pati query, kad veiktu visi input)
 const pswInputs = document.querySelector('#loginLastname');
-// tas pats kas virsuj
 const nameInputs = document.querySelector('#loginName');
 
 // Click event that sends input values to Database
@@ -47,33 +45,17 @@ addReg.addEventListener('click', function(event){
     pswd = pswInput.value
     AddReg(namer,pswd);
     })
-//Pasitikrink, nes gali buti kad daug du kartus suveikia funckija kazkodel
-function AddReg(namer,pswd){
-  getUsers();
-  let passFiltered
-  getData.then(result => {
-      
-       it = result.data.filter(({name}) => name === namer);
-       console.log(JSON.stringify(it)||[]);
-  //poto isfiltruoja visus is array visus kurie atitinka ir passworda(jeigu butu du tie patys vardai)
-  passFiltered = it.filter(({password}) => password === pswd);
-  console.log(JSON.stringify(passFiltered)||[]);
-})  
-  if(passFiltered == null){
 
 function AddReg(namer,pswd){
   getUsers();
   let passFiltered
   getData.then(result => {
-      
        it = result.data.filter(({name}) => name === namer);
        console.log(JSON.stringify(it)||[]);
-  //poto isfiltruoja visus is array visus kurie atitinka ir passworda(jeigu butu du tie patys vardai)
   passFiltered = it.filter(({lastname}) => lastname === pswd);
   console.log(JSON.stringify(passFiltered)||[]);
 })  
   if(passFiltered == null){
-
     const apiPost = fetch('https://testapi.io/api/Donciavas/resource/registration', {
         method: 'POST',
         headers: {
