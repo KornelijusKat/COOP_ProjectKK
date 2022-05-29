@@ -161,4 +161,4 @@ function GetUser(){
 }
 
 let art = JSON.parse(localStorage.getItem("User"));
-userhead3.innerHTML +=  JSON.stringify(art[0]['name'] + JSON.stringify(art[0]['lastname']))
+userhead3.innerHTML +=  JSON.stringify(art[0]['name'] + JSON.stringify(art[0]['lastname']));
