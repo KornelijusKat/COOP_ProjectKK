@@ -1,11 +1,12 @@
 // Login form shell
+
 // lastname inputo value
 let lastnames;
 // get response data laiko
 let getData;
   // namer bus is login inputo vardas pasiimtas
 let namer;
-  // cia array bus, storinti filtra;
+  // cia array storinti filtra;
 let it;
 // Get the modal
 var modal = document.getElementById('logindiv');
@@ -58,7 +59,7 @@ const addReg = document.querySelector('#signUpBtn');
 const getReg = document.querySelector('#loginBtn');
 const emailInput = document.querySelector('#email');
 const nameInput = document.querySelector('#regName');
-const pswInput = document.querySelector('#regLastName');
+const pswInput = document.querySelector('#regLastname');
 //login inputo naujas pavadinimas(kazkodel neisejo man perduoti ta pati query, kad veiktu visi input)
 const pswInputs = document.querySelector('#loginLastname');
 // tas pats kas virsuj
@@ -70,7 +71,7 @@ addReg.addEventListener('click', function(event){
     pswd = pswInput.value
     AddReg(namer,pswd);
     })
-//Pasitikrink, nes gali buti kad daug du kartus suveikia funckija kazkodel
+
 function AddReg(namer,pswd){
   getUsers();
   let passFiltered
@@ -83,8 +84,6 @@ function AddReg(namer,pswd){
   console.log(JSON.stringify(passFiltered)||[]);
 })  
   if(passFiltered == null){
-
-   
     const apiPost = fetch('https://testapi.io/api/Donciavas/resource/registration', {
         method: 'POST',
         headers: {
@@ -160,9 +159,12 @@ function render(users) {
         it = result.data.filter(({name}) => name === theName);
         //poto isfiltruoja visus is array visus kurie atitinka ir passworda(jeigu butu du tie patys vardai)
         let passFiltered = it.filter(({lastname}) => lastname === thePsw);
-        //console.log(passFiltered);
+        if(passFiltered == undefined || passFiltered.length === 0) {
+          alert("Your user doesn't exist");
+        }
+        else{
         localStorage.setItem('User', JSON.stringify(passFiltered)||[]);
-        // reikejo pakeisti kad pirma i folderi eina ir tada i doithtml
-          window.location.href = "./DoItApp/DoItHtml.html";
+        window.location.href = "./DoItApp/DoItHtml.html";
+        }
     })
   }  

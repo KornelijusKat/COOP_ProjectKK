@@ -161,11 +161,11 @@ function GetUser(){
 }
 //uncomment this one if you want to test but no item localstorage
 //localStorage.setItem('name','Jeff');
-let thb = [{
-  "name" : "Jeff",
-  "lastname": "jamal"
-}]
-localStorage.setItem('names',JSON.stringify(thb));
-let art = JSON.parse(localStorage.getItem("names"));
-console.log(thb);
-userhead3.innerHTML +=  JSON.stringify(art[0]['name'])
+// let thb = [{
+//   "name" : "Jeff",
+//   "lastname": "jamal"
+// }]
+// localStorage.setItem('names',JSON.stringify(thb));
+let art = JSON.parse(localStorage.getItem("User"));
+// userhead3.innerHTML +=  JSON.stringify(art[0]['name'])
+userhead3.innerHTML +=  JSON.stringify(art[0]['name'] + JSON.stringify(art[0]['lastname']))
