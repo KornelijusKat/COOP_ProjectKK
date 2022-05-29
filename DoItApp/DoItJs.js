@@ -159,13 +159,6 @@ function GetUser(){
   const getName = localStorage.getItem('name')||[];
   return getName;
 }
-//uncomment this one if you want to test but no item localstorage
-//localStorage.setItem('name','Jeff');
-let thb = [{
-  "name" : "Jeff",
-  "lastname": "jamal"
-}]
-//localStorage.setItem('names',JSON.stringify(thb));
+
 let art = JSON.parse(localStorage.getItem("User"));
-console.log(thb);
-userhead3.innerHTML +=  JSON.stringify(art[0]['name'] + JSON.stringify(art[0]['password']))
+userhead3.innerHTML +=  JSON.stringify(art[0]['name'] + JSON.stringify(art[0]['lastname']))

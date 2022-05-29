@@ -8,46 +8,45 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1>Welcome to Our Website</h1>
+    <h1>Department of Investigation</h1>
+    <div class="FBIbadge">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHKRcn6ZS7Q0yc_YX0tOKaLkze32VTNUOXrw&usqp=CAU" alt="FBIbadge" class="FBIimg">
+    </div>
 
 <!-- Login form shell -->
 
-<button onclick="document.getElementById('logindiv').style.display='block'" style="width:auto; left: 47%;
-position: absolute; display: block; transform: translateX(-50%)">Login</button>
+<button id="login" onclick="document.getElementById('logindiv').style.display='block'" style="width:auto; left: 47%;
+position: absolute; display: inline-block;; transform: translateX(-50%)">Login</button>
 
 <div id="logindiv" class="modal">
-  
-  <form class="modal-content animate"                      >
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('logindiv').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="https://cdn3.iconfinder.com/data/icons/essential-rounded/64/Rounded-31-512.png" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label for="name"><b>Name</b></label>
-      <!-- login name pavadinimas pakeistas -->
-      <input id = namez type="text" placeholder="Enter Name" name="name" required>
-
-      <label for="psw"><b>Password</b></label>
-      <!-- login passwordo pavadinimas pakeistas-->
-      <input id = pasz type="password" placeholder="Enter Password" name="psw" required>
+    <form class="modal-content animate"                      >
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('logindiv').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <img src="https://cdn3.iconfinder.com/data/icons/essential-rounded/64/Rounded-31-512.png" alt="Avatar" class="avatar">
+        </div>
         
-      <button id="loginbtn" type="submit" onclick="getUsers()">Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
+        <div class="container">
+            <label for="name"><b>Name</b></label>
+            <input id = loginName type="text" placeholder="Enter Name" name="name" required>
 
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('logindiv').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
+            <label for="lastname"><b>lastname</b></label>
+            <input id = loginLastname type="text" placeholder="Enter lastname" name="lastname" required>
+        
+            <button id="loginBtn" type="submit">Login</button>
+            <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('logindiv').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+    </form>
 </div>
 
 <!-- Registration form shell -->
 
-<button id="signupbtn" onclick="document.getElementById('regdiv').style.display='block'" style="width:auto; left: 53%;
+<button id="signUp" onclick="document.getElementById('regdiv').style.display='block'" style="display: inline-block; width:auto; left: 53%;
 position: absolute; transform: translateX(-50%);">Sign Up</button>
 
 <div id="regdiv" class="modal">
@@ -58,31 +57,26 @@ position: absolute; transform: translateX(-50%);">Sign Up</button>
       <p>Please fill in this form to create an account.</p>
       <hr>
       <label for="email"><b>Email</b></label>
-      <input id="email" type="text" placeholder="Enter your Email" name="email" required>
+      <input id="email" type="email" placeholder="Enter your Email" name="email" required>
 
       <label for="name"><b>Name</b></label>
-      <input id="name" type="text" placeholder="Enter your Name" name="name" required>
+      <input id="regName" type="text" placeholder="Enter your Name" name="name" required>
 
 
-      <label for="psw"><b>Password</b></label>
-      <input id="psw" type="password" placeholder="Enter your Password" name="psw" required>
+      <label for="lastname"><b>Lastname</b></label>
+      <input id="regLastname" type="text" placeholder="Enter your Lastname" name="lastname" required>
 
-      <label for="psw-repeat"><b>Repeat Password</b></label>
-      <input type="password" placeholder="Repeat your Password" name="psw-repeat" required>
-      
-      <label>
-        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-      </label>
-
-      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+      <p>By creating an account you agree to our <a href="https://www.freeprivacypolicy.com/free-privacy-policy-generator/" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('regdiv').style.display='none'" class="cancelbtn">Cancel</button>
-        <!-- Pakeiciau antraji singup mygtuka kitu atveju pirmas singupbtn atlikdavo register funckicja-->
-        <button type="submit" id="signupbtnZ" onclick="AddReg()" class="signupbtn">Sign Up</button>
+        <button type="submit" id="signUpBtn" onclick="validEmail()" class="signUpBtn">Sign Up</button>
       </div>
     </div>
   </form>
+</div>
+<div class="backgroundContainer">
+    <img>
 </div>
 </body>
 <script src="/script.js"></script>
