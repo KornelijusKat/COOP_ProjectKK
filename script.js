@@ -1,5 +1,12 @@
 // Login form shell
-
+// psw inputo value
+let passwords;
+// get response data laiko
+let getData;
+  // namer bus is login inputo vardas pasiimtas
+let namer;
+  // cia array bus, storinti filtra;
+let it;
 // Get the modal
 var modal = document.getElementById('logindiv');
 
@@ -54,19 +61,37 @@ localStorage.setItem("users",JSON.stringify(user_records));
 }
 }
 
-const addReg = document.querySelector('#signupbtn');
+const addReg = document.querySelector('#signupbtnZ');
 const getReg = document.querySelector('#loginbtn');
 const emailInput = document.querySelector('#email');
 const nameInput = document.querySelector('#name');
 const pswInput = document.querySelector('#psw');
-
+//login inputo naujas pavadinimas(kazkodel neisejo man perduoti ta pati query, kad veiktu visi input)
+const pswInputs = document.querySelector('#pasz');
+// tas pats kas virsuj
+const nameInputs = document.querySelector('#namez');
 // Click event that sends input values to Database
 addReg.addEventListener('click', function(event){
     event.preventDefault();
-    AddReg();
+    namer = nameInput.value;
+    pswd = pswInput.value
+    AddReg(namer,pswd);
     })
+//Pasitikrink, nes gali buti kad daug du kartus suveikia funckija kazkodel
+function AddReg(namer,pswd){
+  getUsers();
+  let passFiltered
+  getData.then(result => {
+      
+       it = result.data.filter(({name}) => name === namer);
+       console.log(JSON.stringify(it)||[]);
+  //poto isfiltruoja visus is array visus kurie atitinka ir passworda(jeigu butu du tie patys vardai)
+  passFiltered = it.filter(({password}) => password === pswd);
+  console.log(JSON.stringify(passFiltered)||[]);
+})  
+  if(passFiltered == null){
 
-function AddReg(){
+   
     const apiPost = fetch('https://testapi.io/api/Donciavas/resource/registration', {
         method: 'POST',
         headers: {
@@ -86,15 +111,25 @@ function AddReg(){
             console.log('not okay');
           }
         })  .then((result) => {
-          console.log(result);
+          let array1 = [];
+          // json I array idedu nes savoj pusei isiemu per array
+          array1.push(result);
+          localStorage.setItem('User', JSON.stringify(array1)||[]);
+          // reikejo pakeisti kad pirma i folderi eina ir tada i doithtml
+            window.location.href = "./DoItApp/DoItHtml.html";
       })
       .catch((err) => {
         console.log(err);  
     })  
+  }
+  else{
+    alert("duplicate");
+  }
 }
 
 function getUsers() {
-  fetch('https://testapi.io/api/Donciavas/resource/registration')
+
+  getData = fetch('https://testapi.io/api/Donciavas/resource/registration')
   .then((response) => {
     if (response.ok) {
       console.log('ok');
@@ -103,16 +138,14 @@ function getUsers() {
       console.log('not okay');
     }
   })
-  .then(result => { 
-    render(users)
-      })
-      .then(result1 => { 
-        let it = result.data.filter(({nameInput}) => User === getUsers() )||[];
-        localStorage.setItem('User', JSON.stringify(it)||[]);
+  
+    
+        //let it = result.data.filter(({User}) => User.name === nameInput.value && User.password === pswInput.value)||[];
+        //localStorage.setItem('User', JSON.stringify(it)||[]);
         // window.location.href("DoItHtml.html");
       // window.location.href = "DoItHtml.html";
       // window.location.assign("DoItHtml.html");
-      })
+  
 
   // .then(res => render(res.data)) 
   // .then(render(users));
@@ -124,7 +157,10 @@ function getUsers() {
 // Click event that gets values from Database
 getReg.addEventListener('click', function(e){
   e.preventDefault();
-  getUsers();
+  //paduodam musu variable 
+  namer = nameInputs.value;
+  passwords = pswInputs.value;
+  FilterUserLogIn(namer,passwords);
   })
 
 function render(users) {
@@ -132,3 +168,19 @@ function render(users) {
     saveData()
     })
   }
+  function FilterUserLogIn(theName, thePsw){
+    getUsers();
+   
+    getData.then(result =>{
+        //render(result.data)
+      
+        //NAUJA, i array ideda isfiltruota name skilti is duombazes pagal logine padaryta input
+        it = result.data.filter(({name}) => name === theName);
+        //poto isfiltruoja visus is array visus kurie atitinka ir passworda(jeigu butu du tie patys vardai)
+        let passFiltered = it.filter(({password}) => password === thePsw);
+        //console.log(passFiltered);
+        localStorage.setItem('User', JSON.stringify(passFiltered)||[]);
+        // reikejo pakeisti kad pirma i folderi eina ir tada i doithtml
+          window.location.href = "./DoItApp/DoItHtml.html";
+    })
+  }  
