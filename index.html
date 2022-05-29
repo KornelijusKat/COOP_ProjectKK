@@ -58,7 +58,7 @@ position: absolute; transform: translateX(-50%);">Sign Up</button>
       <p>Please fill in this form to create an account.</p>
       <hr>
       <label for="email"><b>Email</b></label>
-      <input id="email" type="text" placeholder="Enter your Email" name="email" required>
+      <input id="email" type="email" placeholder="Enter your Email" name="email" required>
 
       <label for="name"><b>Name</b></label>
       <input id="regName" type="text" placeholder="Enter your Name" name="name" required>
@@ -71,7 +71,7 @@ position: absolute; transform: translateX(-50%);">Sign Up</button>
 
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('regdiv').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" id="signUpBtn" class="signUpBtn">Sign Up</button>
+        <button type="submit" id="signUpBtn" onclick="validEmail()" class="signUpBtn">Sign Up</button>
       </div>
     </div>
   </form>

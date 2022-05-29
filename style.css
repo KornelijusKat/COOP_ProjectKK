@@ -1,3 +1,4 @@
+/* Main Page */
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
@@ -30,7 +31,7 @@ h1 {
 /* Login form shell */
 
 /* Full-width input fields */
-input[type=text] {
+input[type=text], [type=email] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -157,7 +158,7 @@ span.lastname {
 /* Registration form shell */
 
 /* Add a background color when the inputs get focus */
-input[type=text]:focus {
+input[type=text], [type=email]:focus {
     background-color: #ddd;
     outline: none;
   }
