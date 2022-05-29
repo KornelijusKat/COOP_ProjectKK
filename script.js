@@ -1,12 +1,15 @@
-
 // lastname inputo value
 let lastnames;
+
 // get response data laiko
 let getData;
+
   // namer bus is login inputo vardas pasiimtas
 let namer;
+
   // cia array storinti filtra;
 let it;
+
 // Get the modal of login
 var modal = document.getElementById('logindiv');
 
@@ -36,6 +39,7 @@ const pswInput = document.querySelector('#regLastname');
 const pswInputs = document.querySelector('#loginLastname');
 // tas pats kas virsuj
 const nameInputs = document.querySelector('#loginName');
+
 // Click event that sends input values to Database
 addReg.addEventListener('click', function(event){
     event.preventDefault();
@@ -43,6 +47,19 @@ addReg.addEventListener('click', function(event){
     pswd = pswInput.value
     AddReg(namer,pswd);
     })
+//Pasitikrink, nes gali buti kad daug du kartus suveikia funckija kazkodel
+function AddReg(namer,pswd){
+  getUsers();
+  let passFiltered
+  getData.then(result => {
+      
+       it = result.data.filter(({name}) => name === namer);
+       console.log(JSON.stringify(it)||[]);
+  //poto isfiltruoja visus is array visus kurie atitinka ir passworda(jeigu butu du tie patys vardai)
+  passFiltered = it.filter(({password}) => password === pswd);
+  console.log(JSON.stringify(passFiltered)||[]);
+})  
+  if(passFiltered == null){
 
 function AddReg(namer,pswd){
   getUsers();
@@ -56,6 +73,7 @@ function AddReg(namer,pswd){
   console.log(JSON.stringify(passFiltered)||[]);
 })  
   if(passFiltered == null){
+
     const apiPost = fetch('https://testapi.io/api/Donciavas/resource/registration', {
         method: 'POST',
         headers: {
