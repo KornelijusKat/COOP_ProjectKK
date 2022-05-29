@@ -7,10 +7,30 @@ h1 {
     margin-top: 110px;
 }
 
+.FBIimg {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+}
+
+.backgroundContainer {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('https://img.bhs4.com/0e/c/0ec6b1f2738dbc167c0d863d88348c3ac12e1ca3_large.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    object-fit: cover;
+    max-width: 480px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 /* Login form shell */
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -21,13 +41,11 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  /* display: flex; */
-  /* flex-direction: column; */
   text-align: center;
   background-color: #049761;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 15px 0;
   border: none;
   cursor: pointer;
   width: 100%;
@@ -65,7 +83,7 @@ img.avatar {
   padding: 16px;
 }
 
-span.psw {
+span.lastname {
   float: right;
   padding-top: 16px;
 }
@@ -128,7 +146,7 @@ span.psw {
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
-  span.psw {
+  span.lastname {
      display: block;
      float: none;
   }
@@ -139,13 +157,13 @@ span.psw {
 /* Registration form shell */
 
 /* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus {
     background-color: #ddd;
     outline: none;
   }
 
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
+/* Float cancel and signUp buttons and add an equal width */
+.cancelbtn, .signUp {
     float: left;
     width: 50%;
   }
@@ -163,9 +181,9 @@ hr {
     display: table;
   }
 
-  /* Change styles for cancel button and signup button on extra small screens */
+  /* Change styles for cancel button and signUp button on extra small screens */
   @media screen and (max-width: 300px) {
-    .cancelbtn, .signupbtn {
+    .cancelbtn, .signUp {
        width: 100%;
     }
   }

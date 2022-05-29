@@ -1,13 +1,16 @@
 // Login form shell
-
+// lastname inputo value
+let lastnames;
+// get response data laiko
+let getData;
+  // namer bus is login inputo vardas pasiimtas
+let namer;
+  // cia array bus, storinti filtra;
+let it;
 // Get the modal
 var modal = document.getElementById('logindiv');
 
-// let loginButton = document.querySelector("#loginbtn");  loginButton.style.position = "absolute";
-// loginButton.style.left = "47%";
-// loginButton.style.transform = "translateX(-50%)";
-
-// When the user clicks anywhere outside of the modal, close it
+// When the user clicks anywhere outside of the modal, closes it
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
@@ -26,19 +29,16 @@ window.onclick = function(event) {
   }
 }
 
-// let registrationButton = document.querySelector("#signupbtn");  registrationButton.style.position = "absolute";
-// registrationButton.style.left = "53%";
-// registrationButton.style.transform = "translateX(-50%)";
 function saveData()
 {
-let email,name,psw;
+let email,name,lastname;
 
 email = document.getElementById("email").value;
-name = document.getElementById("name").value;
-psw = document.getElementById("psw").value;
+name = document.getElementById("loginName").value;
+lastname = document.getElementById("loginLastname").value;
 
-let user_records=new Array();
-user_records=JSON.parse(localStorage.getItem("users"))?JSON.parse(localStorage.getItem("users")):[]
+let user_records = new Array();
+user_records = JSON.parse(localStorage.getItem("users"))?JSON.parse(localStorage.getItem("users")):[]
 if (user_records.some((v) => {return v.email==email}))
 {
   alert("duplicate data");
@@ -47,26 +47,44 @@ else
 {
   user_records.push({
   "email":email,
-  "name":name,
-  "psw":psw
+  "loginName":name,
+  "loginLastname":lastname
 })
 localStorage.setItem("users",JSON.stringify(user_records));
 }
 }
 
-const addReg = document.querySelector('#signupbtn');
-const getReg = document.querySelector('#loginbtn');
+const addReg = document.querySelector('#signUpBtn');
+const getReg = document.querySelector('#loginBtn');
 const emailInput = document.querySelector('#email');
-const nameInput = document.querySelector('#name');
-const pswInput = document.querySelector('#psw');
-
+const nameInput = document.querySelector('#regName');
+const pswInput = document.querySelector('#regLastName');
+//login inputo naujas pavadinimas(kazkodel neisejo man perduoti ta pati query, kad veiktu visi input)
+const pswInputs = document.querySelector('#loginLastname');
+// tas pats kas virsuj
+const nameInputs = document.querySelector('#loginName');
 // Click event that sends input values to Database
 addReg.addEventListener('click', function(event){
     event.preventDefault();
-    AddReg();
+    namer = nameInput.value;
+    pswd = pswInput.value
+    AddReg(namer,pswd);
     })
+//Pasitikrink, nes gali buti kad daug du kartus suveikia funckija kazkodel
+function AddReg(namer,pswd){
+  getUsers();
+  let passFiltered
+  getData.then(result => {
+      
+       it = result.data.filter(({name}) => name === namer);
+       console.log(JSON.stringify(it)||[]);
+  //poto isfiltruoja visus is array visus kurie atitinka ir passworda(jeigu butu du tie patys vardai)
+  passFiltered = it.filter(({lastname}) => lastname === pswd);
+  console.log(JSON.stringify(passFiltered)||[]);
+})  
+  if(passFiltered == null){
 
-function AddReg(){
+   
     const apiPost = fetch('https://testapi.io/api/Donciavas/resource/registration', {
         method: 'POST',
         headers: {
@@ -75,7 +93,7 @@ function AddReg(){
        body: JSON.stringify({
           email: emailInput.value,
           name: nameInput.value,
-          password: pswInput.value 
+          lastname: pswInput.value 
         })
       })
         .then((response) => {
@@ -86,15 +104,25 @@ function AddReg(){
             console.log('not okay');
           }
         })  .then((result) => {
-          console.log(result);
+          let array1 = [];
+          // json I array idedu nes savoj pusei isiemu per array
+          array1.push(result);
+          localStorage.setItem('User', JSON.stringify(array1)||[]);
+          // reikejo pakeisti kad pirma i folderi eina ir tada i doithtml
+            window.location.href = "./DoItApp/DoItHtml.html";
       })
       .catch((err) => {
         console.log(err);  
     })  
+  }
+  else{
+    alert("duplicate");
+  }
 }
 
 function getUsers() {
-  fetch('https://testapi.io/api/Donciavas/resource/registration')
+
+  getData = fetch('https://testapi.io/api/Donciavas/resource/registration')
   .then((response) => {
     if (response.ok) {
       console.log('ok');
@@ -103,19 +131,6 @@ function getUsers() {
       console.log('not okay');
     }
   })
-  .then(result => { 
-    render(users)
-      })
-      .then(result1 => { 
-        let it = result.data.filter(({nameInput}) => User === getUsers() )||[];
-        localStorage.setItem('User', JSON.stringify(it)||[]);
-        // window.location.href("DoItHtml.html");
-      // window.location.href = "DoItHtml.html";
-      // window.location.assign("DoItHtml.html");
-      })
-
-  // .then(res => render(res.data)) 
-  // .then(render(users));
   .catch((error) => {
     console.log(error);  
 })  
@@ -124,7 +139,10 @@ function getUsers() {
 // Click event that gets values from Database
 getReg.addEventListener('click', function(e){
   e.preventDefault();
-  getUsers();
+  //paduodam musu variable 
+  namer = nameInputs.value;
+  lastnames = pswInputs.value;
+  FilterUserLogIn(namer,lastnames);
   })
 
 function render(users) {
@@ -132,3 +150,19 @@ function render(users) {
     saveData()
     })
   }
+  function FilterUserLogIn(theName, thePsw){
+    getUsers();
+   
+    getData.then(result =>{
+        //render(result.data)
+      
+        //NAUJA, i array ideda isfiltruota name skilti is duombazes pagal logine padaryta input
+        it = result.data.filter(({name}) => name === theName);
+        //poto isfiltruoja visus is array visus kurie atitinka ir passworda(jeigu butu du tie patys vardai)
+        let passFiltered = it.filter(({lastname}) => lastname === thePsw);
+        //console.log(passFiltered);
+        localStorage.setItem('User', JSON.stringify(passFiltered)||[]);
+        // reikejo pakeisti kad pirma i folderi eina ir tada i doithtml
+          window.location.href = "./DoItApp/DoItHtml.html";
+    })
+  }  
