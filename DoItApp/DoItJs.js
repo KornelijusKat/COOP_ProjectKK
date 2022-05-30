@@ -14,11 +14,15 @@ const addformlocation = document.querySelector('#Form');
 const userhead3 = document.querySelector('#ShowUser');
 const logout = document.querySelector('#Logout');
 let placeholder;
+const cancelBtn = document.createElement('button');
+cancelBtn.id = 'cancel';
+cancelBtn.innerHTML = "Cancel"
 submitter2.setAttribute('type','submit');
 submitter.setAttribute("type","submit");
 //button click that shows a form to submit for posting to database
 AddButton.addEventListener('click',function(event){
     addformlocation.innerHTML = "";
+    Cancel(newForm);
     createForm(submitter);
     newForm.reset();
 })
@@ -30,13 +34,13 @@ logout.addEventListener('click',function(event){
 function createForm(submit){ 
     firstInput.placeholder = "type";
     secondInput.placeholder = "content";
-    thirdInput.placeholder = "endDate";
-    newForm.append(firstInput,secondInput,thirdInput,submit);
+    thirdInput.placeholder = "endDate 2020-01-01";
+    newForm.append(firstInput,secondInput,thirdInput,submit,cancelBtn);
     addformlocation.append(newForm);
 }
 //Adds new record to users account ps(insert user value into body when localhost thing is finished)
 function AddPost(){
-    const apiPost = fetch('https://testapi.io/api/KornelKat/resource/SecondDatabase', {
+     fetch('https://testapi.io/api/KornelKat/resource/SecondDatabase', {
         method: 'POST',
         headers: {
          'Content-type': 'application/json'
@@ -45,7 +49,7 @@ function AddPost(){
           type: firstInput.value,
           content: secondInput.value,
           endDate: thirdInput.value, 
-          User: JSON.stringify(art[0]['name']).replaceAll('"',"") + JSON.stringify(art[0]['lastname']).replaceAll('"',"")
+          User: JSON.stringify(UserFromLogIn[0]['name']).replaceAll('"',"") + JSON.stringify(UserFromLogIn[0]['lastname']).replaceAll('"',"")
         })
       })
         .then((response) => {
@@ -82,7 +86,7 @@ let recordfetch;
 function ShowRecords(){
   GetRecordsOfUser();
   recordfetch.then(result => { 
-    let it = result.data.filter(({User}) => User === (JSON.stringify(art[0]['name']).replaceAll('"',"") + JSON.stringify(art[0]['lastname']).replaceAll('"',"")));
+    let it = result.data.filter(({User}) => User === (JSON.stringify(UserFromLogIn[0]['name']).replaceAll('"',"") + JSON.stringify(UserFromLogIn[0]['lastname']).replaceAll('"',"")));
     container.innerHTML = "";
     addformlocation.innerHTML = "";
     CreateDiv(it);
@@ -91,16 +95,16 @@ function ShowRecords(){
 //creates Div cards
 function CreateDiv(Records){
      Records.forEach(element => {
-        const DivCard = document.createElement('div');
+        const divCard = document.createElement('div');
         const buttondiv = document.createElement('div');
         const paragraph = document.createElement('p');
         buttondiv.className = 'cardbuttondiv';
-        DivCard.className = 'card';
+        divCard.className = 'card';
         const editButton = document.createElement('button');
         const deleteButton = document.createElement('button');
         deleteButton.addEventListener('click',function(event){
           const elementID =  this.parentNode.parentElement.id;;
-          DeleteRecord(elementID,DivCard);
+          DeleteRecord(elementID,divCard);
         });
         editButton.addEventListener('click',function(event){
           event.preventDefault();
@@ -109,8 +113,9 @@ function CreateDiv(Records){
           placeholder = this.parentNode.parentElement.id;
           EditFields(placeholder);        
           submitter2.addEventListener('click',function(event){
-            event.preventDefault();
-            EditRecord(placeholder);
+            event.preventDefault();  
+            Cancel(editForm);      
+            EditRecord(placeholder);     
           })
         })
         console.log(element);
@@ -123,15 +128,15 @@ function CreateDiv(Records){
                   .replaceAll('"',' ');
         editButton.className = 'recordbtn';
         editButton.innerHTML = "Edit";
-        deleteButton.className = 'recordbtn2';
+        deleteButton.className = 'recordbtn';
         deleteButton.innerHTML = 'Delete';
         buttondiv.append(editButton,deleteButton);
-        DivCard.append(paragraph,buttondiv);
-        DivCard.setAttribute('id',element.id);
-        container.append(DivCard)});
+        divCard.append(paragraph,buttondiv);
+        divCard.setAttribute('id',element.id);
+        container.append(divCard)});
 }  
 //Deletes selected div card
-async function DeleteRecord(RecordID,DivCard){
+async function DeleteRecord(RecordID,divCard){
   const deleter = await fetch(`https://testapi.io/api/KornelKat/resource/SecondDatabase/${RecordID}`,{
     method:'DELETE',
     headers:{
@@ -147,9 +152,9 @@ submitter.addEventListener('click', function(event){
 event.preventDefault();
 AddPost();
 })
-//Changes the selected record of user, ps(need to change the inner html part to a new created main or section maybe)
-async function EditRecord(Userid){
- const editing =  await fetch(`https://testapi.io/api/KornelKat/resource/SecondDatabase/${Userid}`, {
+//Changes the selected record of user, ps(need to change the inner html pUserFromLogIn to a new created main or section maybe)
+function EditRecord(Userid){
+ fetch(`https://testapi.io/api/KornelKat/resource/SecondDatabase/${Userid}`, {
     method: 'PUT',
     headers:{
       'Content-type': 'application/json',
@@ -158,22 +163,30 @@ async function EditRecord(Userid){
       'type': editInput1.value,
       'content': editInput2.value,
       'endDate' : editInput3.value,
-      'User' :  (JSON.stringify(art[0]['name']).replaceAll('"',"") + JSON.stringify(art[0]['lastname']).replaceAll('"',""))
+      'User' :  (JSON.stringify(UserFromLogIn[0]['name']).replaceAll('"',"") + JSON.stringify(UserFromLogIn[0]['lastname']).replaceAll('"',""))
     })
   })
-    if(editing){
-    ShowRecords();
-    }
-}
+    .then(response => {
+      if(response.ok){
+      ShowRecords();
+      }
+      else{
+        alert("wrong inputs, do not leave any empty inputs, check if date is correct");
+      }
+    })
+  }
+ 
+
+
 ShowRecords()
 //Editing form for input
 function EditFields(placeholder){
-cardcontent(placeholder);
-editForm.append(editInput1,editInput2,editInput3,submitter2);
-addformlocation.append(editForm);
+  cardcontent(placeholder);
+  editForm.append(editInput1,editInput2,editInput3,submitter2,cancelBtn);
+  addformlocation.append(editForm);
 }
-let art = JSON.parse(localStorage.getItem("User"));
-userhead3.innerHTML +=  JSON.stringify(art[0]['name']+ " " + JSON.stringify(art[0]['lastname'])).replaceAll("\\","").replaceAll('"','');
+let UserFromLogIn = JSON.parse(localStorage.getItem("User"));
+userhead3.innerHTML +=  JSON.stringify(UserFromLogIn[0]['name']+ " " + JSON.stringify(UserFromLogIn[0]['lastname'])).replaceAll("\\","").replaceAll('"','');
 function cardcontent(eleId){ 
   GetRecordsOfUser();
   recordfetch.then(result => {
@@ -184,3 +197,9 @@ function cardcontent(eleId){
   editInput3.value = objarray[0]['endDate'];
   }
 )}
+function Cancel(form){
+cancelBtn.addEventListener('click', function(event){
+  form.reset();
+
+})
+}
