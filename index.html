@@ -15,16 +15,15 @@
 
 <!-- Login form shell -->
 
-<button id="login" onclick="document.getElementById('logindiv').style.display='block'" style="width:auto; left: 47%;
-position: absolute; display: inline-block;; transform: translateX(-50%)">Login</button>
-
+<button id="login" class="btnClass" onclick="document.getElementById('logindiv').style.display='block'" style="width:auto; left: 50%;
+position: absolute; transform: translateX(-120%)">Login</button>
 <div id="logindiv" class="modal">
-    <form class="modal-content animate"                      >
+  <span onclick="document.getElementById('logindiv').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content animate">
         <div class="imgcontainer">
-            <span onclick="document.getElementById('logindiv').style.display='none'" class="close" title="Close Modal">&times;</span>
             <img src="https://cdn3.iconfinder.com/data/icons/essential-rounded/64/Rounded-31-512.png" alt="Avatar" class="avatar">
         </div>
-        
+
         <div class="container">
             <label for="name"><b>Name</b></label>
             <input id = loginName type="text" placeholder="Enter Name" name="name" required>
@@ -43,12 +42,10 @@ position: absolute; display: inline-block;; transform: translateX(-50%)">Login</
 
 <!-- Registration form shell -->
 
-<button id="signUp" onclick="document.getElementById('regdiv').style.display='block'" style="display: inline-block; width:auto; left: 53%;
-position: absolute; transform: translateX(-50%);">Sign Up</button>
-
+<button id="signUp" onclick="document.getElementById('regdiv').style.display='block'" style="width:auto; left: 50%; position: absolute;">Sign Up</button>
 <div id="regdiv" class="modal">
     <span onclick="document.getElementById('regdiv').style.display='none'" class="close" title="Close Modal">&times;</span>
-  <form class="modal-content"           >
+  <form class="modal-content">
     <div class="container">
       <h1>Sign Up</h1>
       <p>Please fill in this form to create an account.</p>
