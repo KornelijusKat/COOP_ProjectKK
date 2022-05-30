@@ -1,20 +1,19 @@
 .card{
     max-width: 200px;
     border: solid ;
-    
     margin-top: 10px;
     border-radius: 5px;
     margin-right: 10px;
     overflow-wrap: break-word;
     align-items: center;
     min-width:20%;
-    padding: 20px;
+    padding:40px;
     text-align: center;
     position: relative;
     display: flex;
     flex-direction: column;
     vertical-align: middle;
-
+    justify-content: space-between;
 }
 .container{
     width: 100%;
@@ -24,8 +23,6 @@
     flex-direction: row;
     flex:20%;
     flex-wrap: wrap;
-    
-    
 }
 .button{
    text-align: center;
@@ -35,26 +32,18 @@
 .cardbuttondiv{
     
     height:50px;
-    width: 1px;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
 }
-.recordbtn{
-  position: absolute;
+.recordbtn{ 
   left:50px; 
   bottom:20px;
-  
-  
-    
 }
 .recordbtn2{
-    position: absolute;
-    justify-content: space-between;
     bottom:20px;
     right:50px;
-     
  }
-   
-  
-
 button{
     background-color: #049761;
     border: none;
@@ -71,8 +60,6 @@ button{
 #Form{
     height: 20px;
     width: 100%;
-    
-    
 }
 h1{
     margin-top:110px;
@@ -85,8 +72,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 form{
     border: solid black;
-
-    
 }
 body{
     width: 100%;
