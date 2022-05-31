@@ -175,9 +175,6 @@ function EditRecord(Userid){
       }
     })
   }
- 
-
-
 ShowRecords()
 //Editing form for input
 function EditFields(placeholder){
@@ -200,6 +197,5 @@ function cardcontent(eleId){
 function Cancel(form){
 cancelBtn.addEventListener('click', function(event){
   form.reset();
-
 })
 }
