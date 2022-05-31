@@ -14,7 +14,6 @@
     flex-direction: column; 
     justify-content: space-between;
     line-height: 22px;
-
 }
 .container{
     width: 100%;
@@ -68,8 +67,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 form{
     border: solid black;
-
-    
 }
 body{
     width: 100%;
@@ -78,7 +75,6 @@ body{
 p{
     padding-left: 50px;
     padding-right: 50px;
-    
 }
 #cancel{
     width:60px;
